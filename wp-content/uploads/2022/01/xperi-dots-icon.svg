@@ -1,0 +1,24 @@
+<svg id="Component_112_3" data-name="Component 112 – 3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="72" height="72" viewBox="0 0 72 72">
+  <defs>
+    <linearGradient id="linear-gradient" x2="1" y2="1.025" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#921e93"/>
+      <stop offset="1" stop-color="#e4146e"/>
+    </linearGradient>
+  </defs>
+  <circle id="Ellipse_40" data-name="Ellipse 40" cx="36" cy="36" r="36" fill="url(#linear-gradient)"/>
+  <circle id="Ellipse_1" data-name="Ellipse 1" cx="36" cy="36" r="36" fill="url(#linear-gradient)"/>
+  <g id="Group_15907" data-name="Group 15907" transform="translate(17.5 28.5)">
+    <g id="Ellipse_37" data-name="Ellipse 37" transform="translate(0 2)" fill="none" stroke="#fff" stroke-width="1.5">
+      <circle cx="4.5" cy="4.5" r="4.5" stroke="none"/>
+      <circle cx="4.5" cy="4.5" r="3.75" fill="none"/>
+    </g>
+    <g id="Ellipse_38" data-name="Ellipse 38" transform="translate(12)" fill="none" stroke="#fff" stroke-width="1.5">
+      <circle cx="6.5" cy="6.5" r="6.5" stroke="none"/>
+      <circle cx="6.5" cy="6.5" r="5.75" fill="none"/>
+    </g>
+    <g id="Ellipse_39" data-name="Ellipse 39" transform="translate(28 2)" fill="none" stroke="#fff" stroke-width="1.5">
+      <circle cx="4.5" cy="4.5" r="4.5" stroke="none"/>
+      <circle cx="4.5" cy="4.5" r="3.75" fill="none"/>
+    </g>
+  </g>
+</svg>

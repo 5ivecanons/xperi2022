@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="406.274" height="406.274" viewBox="0 0 406.274 406.274">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.981" y1="0.019" x2="0.016" y2="0.984" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0c9dd9"/>
+      <stop offset="1" stop-color="#78be20"/>
+    </linearGradient>
+    <filter id="Rectangle_98" x="0" y="0" width="406.274" height="406.274" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="30" result="blur"/>
+      <feFlood flood-color="#78be20" flood-opacity="0.102"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_100" data-name="Rectangle 100" width="50" height="50"/>
+    </clipPath>
+  </defs>
+  <g id="Component_28_2" data-name="Component 28 – 2" transform="translate(90 90)">
+    <g transform="matrix(1, 0, 0, 1, -90, -90)" filter="url(#Rectangle_98)">
+      <rect id="Rectangle_98-2" data-name="Rectangle 98" width="160" height="160" rx="7" transform="translate(203.14 90) rotate(45)" fill="url(#linear-gradient)"/>
+    </g>
+    <g id="Group_255" data-name="Group 255" transform="translate(-1135 -4224.515)">
+      <text id="Locations" transform="translate(1175 4354.515)" font-size="18" font-family="Helvetica"><tspan x="22.154" y="14">LOCATIONS</tspan></text>
+      <g id="Group_255-2" data-name="Group 255" transform="translate(1224 4299.515)">
+        <g id="Group_251" data-name="Group 251" transform="translate(0 0)" clip-path="url(#clip-path)">
+          <path id="Path_412" data-name="Path 412" d="M33.36,22.148a8.866,8.866,0,1,0-17.733,0c0,6.782,8.025,13.258,8.366,13.531a.821.821,0,0,0,1,0c.342-.274,8.367-6.762,8.367-13.531M23.942,33.511c-2.02-1.859-6.716-6.688-6.716-11.363a7.266,7.266,0,0,1,14.533,0c0,4.675-4.7,9.5-6.716,11.363l-.55.507Z" transform="translate(0.508 0.432)"/>
+          <path id="Path_413" data-name="Path 413" d="M49.2,24.2H45.138l-.057-.751A20.272,20.272,0,0,0,26.55,4.919L25.8,4.861V.8a.8.8,0,1,0-1.6,0V4.862l-.752.057A20.274,20.274,0,0,0,4.918,23.45L4.86,24.2H.8a.8.8,0,0,0,0,1.6H4.861l.057.751A20.273,20.273,0,0,0,23.449,45.082l.752.057V49.2a.8.8,0,0,0,1.6,0V45.139l.751-.057A20.272,20.272,0,0,0,45.081,26.551l.057-.751H49.2a.8.8,0,0,0,0-1.6M25,43.56A18.56,18.56,0,1,1,43.56,25,18.58,18.58,0,0,1,25,43.56" transform="translate(0 0)"/>
+          <path id="Path_414" data-name="Path 414" d="M24.289,19.532A2.413,2.413,0,1,0,26.7,21.945a2.415,2.415,0,0,0-2.413-2.413" transform="translate(0.712 0.635)"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
