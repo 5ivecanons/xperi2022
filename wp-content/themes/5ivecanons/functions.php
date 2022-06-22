@@ -676,7 +676,10 @@ function twentytwentyone_add_ie_class() {
 }
 add_action( 'wp_footer', 'twentytwentyone_add_ie_class' );
 
-function latest_news_func(){
+function latest_news_func($atts){
+	$a = shortcode_atts( array(
+		'version' => '1',
+	), $atts );
 	$args = array(
     	'post_type' => 'news',
 		'posts_per_page' => 9
@@ -684,14 +687,19 @@ function latest_news_func(){
 	$the_query = new WP_Query( $args );
 	$content = '';
 	if ( $the_query->have_posts() ) {
-		$content .= '<div class="news-wrapper">';
+		$content .= '<div class="news-wrapper version'.$a['version'].'">';
 		while ( $the_query->have_posts() ) {
         	$the_query->the_post();
 			$content .= '<article class="news-tile">';
 			if(get_the_post_thumbnail()){
 				$content .= '<div class="news-tile-image"><img src="'.get_the_post_thumbnail_url().'" alt="'.get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ).'"></div>';
 			}
-			$content .= '<div class="news-tile-content"><h4 class="news-tile-title">'.wp_trim_words(get_the_title(), 7, '...').'</h4>';
+			$category = get_the_category(); 
+			$catname = $category[0]->cat_name;
+			$content .= '<div class="news-tile-content"><div class="attributes">
+<span class="date">'.get_the_date('F j, Y').'</span>
+<span class="category">'.$catname.'</span>
+</div><h4 class="news-tile-title">'.wp_trim_words(get_the_title(), 7, '...').'</h4>';
 			$content .= '<div class="news-tile-excerpt">'.wp_trim_words(get_the_content(), 25, '...').'</div>';
 			$content .= '<div class="news-tile-cta"><a href="'.get_permalink().'" class="btn button">Read More</a></div></div>';
 			$content .= '</article>';
@@ -841,7 +849,7 @@ function megamenu_func($atts){
 	$the_query = new WP_Query( $args );
 	$content = '';
 	if ( $the_query->have_posts() ) {
-		$content .= '<div class="megamenu-wrapper"><div class="container"><div class="row">';
+		$content .= '<div class="close-mm">X</div><div class="megamenu-wrapper"><div class="container"><div class="row">';
 		while ( $the_query->have_posts() ) {
         	$the_query->the_post();
 			$cols = get_field('columns');
@@ -869,3 +877,38 @@ function megamenu_func($atts){
 	return $content;
 }
 add_shortcode( 'megamenu', 'megamenu_func' );
+
+function testimonials_func($atts){
+	$a = shortcode_atts( array(
+		'only' => '',
+	), $atts );
+	$args = array(
+    	'post_type' => 'testimonials',
+		'posts_per_page' => -1
+	);
+	$imagesonly = '';
+	if($a['only'] == 'images'){
+		$imagesonly = ' images-only';
+	}
+	$the_query = new WP_Query( $args );
+	$content = '';
+	if ( $the_query->have_posts() ) {
+		$content .= '<div class="testimonials-wrapper'.$imagesonly.'">';
+		while ( $the_query->have_posts() ) {
+        	$the_query->the_post();
+			$content .= '<article class="testimonial-tile">';
+			if($imagesonly){
+				$content .= '<div class="testimonial-tile-image"><img src="'.get_field('image')['url'].'" alt="'.get_field('image')['url'].'"></div>';
+			}else{
+				$content .= '<div class="testimonial-tile-content"><div class="testimonial-quote">'.get_field('content').'</div>';
+				$content .= '<div class="testimonial-link"><a href="'.get_field('website_link').'" target="_blank">Visit client’s website</a></div>';
+				$content .= '<div class="testimonial-credit"><div class="name">'.get_the_title().'</div><div class="title">'.get_field('title').'</div></div></div>';
+			}
+			$content .= '</article>';
+    	}
+		$content .= '</div>';
+    }
+	wp_reset_postdata();
+	return $content;
+}
+add_shortcode( 'testimonials', 'testimonials_func' );

@@ -31,7 +31,7 @@ $wrapper_classes .= has_nav_menu( 'primary' ) ? ' has-menu' : '';
 	if ( $the_query->have_posts() ) {
 		while ( $the_query->have_posts() ) {
         	$the_query->the_post();
-			$content .= '<div class="megamenu-wrapper menu--'.strtolower(get_the_title()).'"><div class="container"><div class="row">';
+			$content .= '<div class="megamenu-wrapper menu--'.strtolower(get_the_title()).'"><div class="close-mm">X</div><div class="container"><div class="row">';
 			$cols = get_field('columns');
 			foreach($cols as $c){
 				$content .= '<div class="megamenu-column col-sm-'.$c['column_size'].'">';

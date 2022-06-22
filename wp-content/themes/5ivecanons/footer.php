@@ -41,8 +41,6 @@
 							'theme_location' => 'footer',
 							'items_wrap'     => '%3$s',
 							'container'      => false,
-							'link_before'    => '<span>',
-							'link_after'     => '</span>',
 							'fallback_cb'    => false,
 						)
 					);
@@ -61,8 +59,6 @@
 							'theme_location' => 'footer_2',
 							'items_wrap'     => '%3$s',
 							'container'      => false,
-							'link_before'    => '<span>',
-							'link_after'     => '</span>',
 							'fallback_cb'    => false,
 						)
 					);
@@ -81,8 +77,6 @@
 							'theme_location' => 'footer_3',
 							'items_wrap'     => '%3$s',
 							'container'      => false,
-							'link_before'    => '<span>',
-							'link_after'     => '</span>',
 							'fallback_cb'    => false,
 						)
 					);
@@ -166,23 +160,29 @@ $('#masthead .primary-navigation a').click(function(e){
         }, 1000);
 	}
 });*/
+$('.close-mm').click(function(e){
+	$('.subnavigation .megamenu-wrapper').toggle(function(){
+		$('.subnavigation, .primary-navigation > div > .menu-wrapper li').toggleClass('active');
+	$('.subnavigation .inner-wrap').slideToggle(500);
+	});
+});
 $('.menu-item-has-children a').click(function(e){
+	if(!$(this).parent().hasClass('active')){
 	e.preventDefault();
 	$(this).parent().toggleClass('active');
 	var classList = $(this).parent().attr('class');
 	if(classList.indexOf('megamenu--') !== -1){
 		var classes = classList.split(/\s+/);
 		for (var i = 0; i < classes.length; i++) {
-			console.log(classes[i]);
 			if (classes[i].indexOf('megamenu--') !== -1) {
 				var $mm = classes[i].split('--');
-				console.log('here:'+$mm[1]);
 				$('.subnavigation .menu--'+$mm[1]).toggle(function(){
 					$('.subnavigation').toggleClass('active');
 					$('.subnavigation .inner-wrap').slideToggle(500);
 				});
 			}
 		}
+	}
 	}
 });
 $('.wistia-video').magnificPopup({
@@ -215,7 +215,7 @@ $('.logo-carousel .col-sm-12').slick({
     },
 	]
 });
-$('.news-wrapper').slick({
+$('.news-wrapper:not(.version2)').slick({
 	slidesToShow: 3,
   slidesToScroll: 1,
 	autoplay: false,

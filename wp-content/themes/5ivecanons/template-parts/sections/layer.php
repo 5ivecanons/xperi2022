@@ -122,6 +122,12 @@ $style .= '"';
 				<?php echo $t['html']; ?>
 			</div>
 			<?php } ?>
+				
+			<?php if($t['block'] == 'Code'){ ?>
+			<div class="layer-block layer-block--code">
+				<?php echo $t['code']; ?>
+			</div>
+			<?php } ?>
 			
 			<?php if($t['block'] == 'Image'){ ?>
 			<div class="layer-block layer-block--image">
