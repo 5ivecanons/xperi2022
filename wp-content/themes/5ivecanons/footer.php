@@ -126,48 +126,70 @@
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 <script src="/wp-content/themes/5ivecanons/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/wp-content/themes/5ivecanons/assets/map/mapdata.js"></script>
+<script src="/wp-content/themes/5ivecanons/assets/map/worldmap.js"></script>
 <script>
 (function($){
-/*var $current = window.location.pathname;
-if($current == '/' && window.location.hash){
-	var $hash = window.location.hash;
-	var $target = $('.scrollto-'+$hash.slice(1)+'');
-		$('html, body').animate({
-          scrollTop: $target.offset().top - 100
-        }, 1000);
-}
-$('.button, .sg-popup-id-170 a').click(function(e){
-	if($(this).hasClass('button-modal-video')){
-		setTimeout(function(){
-			$('.sgpb-popup-dialog-main-div-wrapper').addClass('video-modal');
-		},100);
-	}else{
-		$('.sgpb-popup-dialog-main-div-wrapper').removeClass('video-modal');
-	}
+if($('#map').length){
+   $.ajax({
+    url: "<?php echo admin_url('admin-ajax.php'); ?>",
+    data: {
+        action: "get_locations"
+    },
+	method : 'POST',
+    success: function (response){
+        console.log(response);
+		var $items = JSON.parse(response);
+		var $count = 0;
+		for(var i = 0; i < $items.length; i++) {
+			var $item = $items[i];
+			simplemaps_worldmap_mapdata.locations[i] = {name: $item['name'], description: $item['description'], lat: $item['latitude'], lng: $item['longitude']};
+			$count++;
+      }
+      simplemaps_worldmap.load();
+		$('.locations-hero h1').html($count+' Locations');
+		$('.locations-hero h1').addClass('active');
+    }
+	});
+} 
+var $grid = $('.locations-wrapper').isotope({
+  itemSelector: '.location',
+  layoutMode: 'fitRows'
 });
-$('.modal-link').click(function(e){
-	var $html = $(this).parent().find('.bio').html();
-	$('#sg-popup-content-wrapper-180 .sgpb-main-html-content-wrapper').html($html);
+$('.countries').on( 'change', function() {
+  var filterValue = this.value;
+	console.log(filterValue);
+  $('.locations-wrapper').isotope({ filter: filterValue });
 });
-$('#masthead .primary-navigation a').click(function(e){
-	var $current = window.location.pathname;
-	if($current == '/'){
-		e.preventDefault();
-		var $hash = $(this).attr('href');
-		var $target = $('.scrollto-'+$hash.slice(2)+'');
-		$('html, body').animate({
-          scrollTop: $target.offset().top - 100
-        }, 1000);
-	}
-});*/
 $('.close-mm').click(function(e){
-	$('.subnavigation .megamenu-wrapper').toggle(function(){
-		$('.subnavigation, .primary-navigation > div > .menu-wrapper li').toggleClass('active');
-	$('.subnavigation .inner-wrap').slideToggle(500);
+	$('.subnavigation .megamenu-wrapper').hide(function(){
+		$('.subnavigation, .primary-navigation > div > .menu-wrapper li.active').removeClass('active');
+	$('.subnavigation .inner-wrap').slideUp(500);
 	});
 });
-$('.menu-item-has-children a').click(function(e){
-	if(!$(this).parent().hasClass('active')){
+if($(window).width() > 992){
+$('.menu-item-has-children.mm--dropdown a').hover(function(e){
+	if(!$('.menu-item-has-children').hasClass('active')){
+	e.preventDefault();
+	$(this).parent().toggleClass('active');
+	var classList = $(this).parent().attr('class');
+	var $text = $(this).text();
+	var $search = 'megamenu--'+$text.toLowerCase();
+	if(classList.indexOf('megamenu--') !== -1){
+		var classes = classList.split(/\s+/);
+		for (var i = 0; i < classes.length; i++) {
+			if (classes[i].indexOf('megamenu--') !== -1) {
+				var $mm = classes[i].split('--');
+				$('.subnavigation .menu--'+$mm[1]).show(function(){
+					$('.subnavigation').toggleClass('active');
+					$('.subnavigation .inner-wrap').slideDown(500);
+				});
+			}
+		}
+	}
+	}
+},function(e){
+	/*if(!$(this).parent().hasClass('active')){
 	e.preventDefault();
 	$(this).parent().toggleClass('active');
 	var classList = $(this).parent().attr('class');
@@ -183,8 +205,9 @@ $('.menu-item-has-children a').click(function(e){
 			}
 		}
 	}
-	}
+	}*/
 });
+}
 $('.wistia-video').magnificPopup({
     type: 'inline',
 	closeBtnInside: false,
@@ -214,6 +237,14 @@ $('.logo-carousel .col-sm-12').slick({
       }
     },
 	]
+});
+$('.partners-wrapper').slick({
+	slidesToShow: 1,
+  slidesToScroll: 1,
+	infinite: true,
+	autoplay: true,
+	dots: true,
+	arrows: true,
 });
 $('.news-wrapper:not(.version2)').slick({
 	slidesToShow: 3,

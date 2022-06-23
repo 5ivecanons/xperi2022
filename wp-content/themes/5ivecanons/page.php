@@ -14,6 +14,7 @@ get_header();
 ?>
 <link rel="stylesheet" id="magnific-css"  href="<?php echo get_template_directory_uri().'/assets/css/magnific-popup.css'; ?>" type="text/css" media="all" />
 <link rel="stylesheet" id="sections-css"  href="<?php echo get_template_directory_uri().'/assets/css/sections.css'; ?>" type="text/css" media="all" />
+<link rel="stylesheet" id="sections-css"  href="<?php echo get_template_directory_uri().'/assets/css/raulQA.css'; ?>" type="text/css" media="all" />
 <div id="layer-content">
 <?php
 if( have_rows('section') ):

@@ -912,3 +912,113 @@ function testimonials_func($atts){
 	return $content;
 }
 add_shortcode( 'testimonials', 'testimonials_func' );
+
+function partners_func($atts){
+	$args = array(
+    	'post_type' => 'partner',
+		'posts_per_page' => -1
+	);
+	$the_query = new WP_Query( $args );
+	$content = '';
+	if ( $the_query->have_posts() ) {
+		$content .= '<div class="partners-wrapper">';
+		$total = $the_query->found_posts;
+		$count = 1;
+		while ( $the_query->have_posts() ) {
+        	$the_query->the_post();
+			if($count == 1) {
+			$content .= '<div class="partners-tile">';
+			}
+			$content .= '<div class="partners-tile-img"><img src="'.get_the_post_thumbnail_url().'" alt="logo"></div>';
+			if($count % 9 == 0 || $count == $total) {
+				if($count != $total) {
+					$content .= '</div><div class="partners-tile">';
+				}else{
+					$content .= '</div>';
+				}
+			}
+			$count++;
+    	}
+		$content .= '</div>';
+    }
+	wp_reset_postdata();
+	return $content;
+}
+add_shortcode( 'partners', 'partners_func' );
+
+function locations_func($atts){
+	$a = shortcode_atts( array(
+		'only' => '',
+	), $atts );
+	$args = array(
+    	'post_type' => 'locations',
+		'posts_per_page' => -1
+	);
+	$the_query = new WP_Query( $args );
+	$field = get_field_object('field_62b2813fe06ed');
+if( $field['choices'] ):
+	$countries = '<select class="countries"><option value="*">Filter by Country</option>';
+    foreach( $field['choices'] as $value => $label ):
+          $countries .= '<option value=".'.$value.'">'.$label.'</option>';
+    endforeach;
+	$countries .= '</select>';
+endif;
+	$content = '';
+	if ( $the_query->have_posts() ) {
+		$total = $the_query->found_posts;
+		$content .= '<div class="global-locations"><div class="global-locations-inner"><div class="locations-filter-wrapper"><div class="locations-number">'.$total.' Global Locations</div><div class="locations-filters"><!--<div class="locations-filter-dept"><div class="locations-list dept-list"></div></div>--><div class="locations-filter-country"><div class="locations-list country-list">'.$countries.'</div></div></div></div>';
+		$content .= '<div class="locations-headers"><div class="locations-header">Name</div><div class="locations-header">Address</div><div class="locations-header">Country</div></div>';
+		$content .= '<div class="locations-wrapper">';
+		while ( $the_query->have_posts() ) {
+        	$the_query->the_post();
+			$content .= '<div class="location '.get_field('country')['value'].'">';
+			$content .= '<div class="location-info">'.get_the_title().'</div>';
+			$content .= '<div class="location-info">'.get_field('address').'</div>';
+			$content .= '<div class="location-info">'.get_field('country')['label'].'</div>';
+			$content .= '</div>';
+    	}
+		$content .= '</div></div></div>';
+    }
+	wp_reset_postdata();
+	return $content;
+}
+add_shortcode( 'locations', 'locations_func' );
+
+function worldmap_func($atts){
+	$content = '';
+	$content .= '<div id="map"></div>';
+	return $content;
+}
+add_shortcode( 'world_map', 'worldmap_func' );
+
+function get_locations(){
+	$args = array(
+    	'post_type' => 'locations',
+		'posts_per_page' => -1
+	);
+	$the_query = new WP_Query( $args );
+	$newarray = array();
+	$content .= '';
+	if ( $the_query->have_posts() ) {
+		while ( $the_query->have_posts() ) {
+        	$the_query->the_post();
+			$itemarray = array();
+			$itemarray['name'] = get_the_title();
+			$imgurl = '/wp-content/uploads/2022/06/office-building-2021-08-30-01-18-56-utc.jpg';
+			if(get_the_post_thumbnail_url()){
+				$imgurl = get_the_post_thumbnail_url();
+			}
+			$itemarray['description'] = '<img src="'.$imgurl.'">'.get_field('address');
+			$itemarray['latitude'] = get_field('latitude');
+			$itemarray['longitude'] = get_field('longitude');
+			//$newarray[] = '{"name": "'.get_the_title().'", "description": "'.get_field('address').'", "latitude": "'.get_field('latitude').'", "longitude": "'.get_field('longitude').'"}';
+			$newarray[] = $itemarray;
+		}
+	}
+	$content .= $newarray;
+	echo json_encode($newarray);
+    die();
+}
+
+add_action( 'wp_ajax_get_locations', 'get_locations' );
+add_action( 'wp_ajax_nopriv_get_locations', 'get_locations' );
