@@ -167,7 +167,7 @@ background: linear-gradient(90deg, rgba(113,4,61,0.8) 0%, rgba(48,19,82,0.5) 70%
 	max-width: 100%;
 }
 .site-logo .custom-logo {
-	max-height: 36px;
+	max-height: 36px !important;
 }
 .site-footer > .site-info {
 	justify-content: center;
@@ -241,20 +241,32 @@ background: linear-gradient(90deg, rgba(113,4,61,0.8) 0%, rgba(48,19,82,0.5) 70%
 	padding: 0 30px 0 14px;
 	position: relative;
 }
-#masthead .primary-navigation .menu-item-has-children > a:after {
+#masthead .primary-navigation .menu-item-has-children > a:after,
+.mobile-menu .primary-navigation .menu-item-has-children > a:after {
 	content: '';
 	width: 0; 
   height: 0; 
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-top: 6px solid #fff;
-	position: absolute;
-    top: 5px;
-    right: 10px;
+	position: relative;
+	margin-left: 8px;
+    top: -2px;
+    right: 0;
 	transition: all 0.5s ease;
+}
+.mobile-menu .primary-navigation .menu-item-has-children > a:after {
+	border-top: 6px solid #78BE20;
+	top: 50%;
+	transform: translatey(-50%);
+}
+.site-branding {
+	position: relative;
+	z-index: 2;
 }
 .primary-navigation {
 	padding-top: 12px;
+	z-index: 1;
 }
 .bordered {
 	border: 7px solid #fff;
@@ -1341,7 +1353,7 @@ background: linear-gradient(45deg, rgba(47,18,80,1) 0%, rgba(109,3,60,1) 100%);
 	background: rgba(0,0,0,0.85);
 	opacity: 0;
 	visibility: hidden;
-	transition: all 0.5s ease;
+	transition: all 0.25s ease;
 }
 .subnavigation.active {
 	opacity: 1;
@@ -1354,7 +1366,7 @@ background: linear-gradient(180deg, rgba(37,14,63,1) 0%, rgba(30,6,31,1) 100%);
 	padding: 90px 0 70px;
 	border-radius: 10px;
 	display: none;
-	transition: all 0.5s ease;
+	transition: all 0.25s ease;
 }
 .subnavigation.active .inner-wrap {
 	max-height: 100%;
@@ -1575,7 +1587,7 @@ background: linear-gradient(180deg, rgba(24,24,24,0.1) 0%, rgba(98,38,167,0.1) 1
 	margin-bottom: 0;
 }
 .brands-layer-top .col-sm-12, .solutions-layer-top .col-sm-12 {
-	margin-bottom: -50px;
+	margin-bottom: -50px !important;
 }
 .brands-layer-top h2, .solutions-layer-top h2 {
 	position: relative;
@@ -2132,7 +2144,8 @@ background: linear-gradient(0deg, rgba(24,24,24,0.2) 0%, rgba(98,38,167,0.17) 10
     top: -30px;
     right: 25px;
     font-size: 25px;
-    line-height: 1;
+    line-height: 0.5;
+	padding-top: 12px;
     cursor: pointer;
 	transition: all 0.5s;
 }
@@ -2767,6 +2780,26 @@ background: linear-gradient(180deg, rgba(12,157,217,0.03) 0%, rgba(98,38,167,0.1
 #content .only-links-layer .button:hover {
 	background: #E4077D;
 }
+.pp-tc ul,
+.pp-tc ol {
+	color: #fff;
+	padding-left: 30px;
+}
+.pp-tc a {
+	color: #78BE20;
+}
+.smcx-widget {
+	margin: 0 auto !important;
+}
+.subnavigation .megamenu-wrapper.menu--solutions .col-sm-3 .megamenu-element:nth-child(2) {
+	margin-bottom: 6px;
+}
+.mobile-menu .primary-navigation {
+	display: none;
+}
+.site-header .primary-navigation > .primary-menu-container .mobile-only {
+	display: none;
+}
 @media (max-width: 1520px){
 	.fa-arrow-left {
 		left: 10px;
@@ -2863,6 +2896,72 @@ background: linear-gradient(180deg, rgba(12,157,217,0.03) 0%, rgba(98,38,167,0.1
 	}
 }
 @media (max-width: 992px) {
+	.primary-navigation .sub-menu .menu-item > a {
+		padding: 15px 0 5px;
+	}
+	.mobile-menu #site-navigation.primary-navigation>div>.menu-wrapper>li>.sub-menu li {
+		background: transparent !important;
+	}
+	.mobile-menu .primary-navigation a {
+		color: #fff;
+		font-family: 'gotham';
+		text-transform: uppercase;
+		padding: 20px 0 8px;
+		position: relative;
+	}
+	#site-navigation.primary-navigation > div > .menu-wrapper > li.mm--dropdown > .sub-menu,
+	.primary-navigation > .primary-menu-container .mobile-only {
+		display: block;
+	}
+	.mobile-menu #site-navigation.primary-navigation > div > .menu-wrapper > li.mm--dropdown > .sub-menu {
+		display: block !important;
+	}
+	.mobile-menu #site-navigation.primary-navigation > div > .menu-wrapper > li > .sub-menu {
+		max-height: 0;
+		background: transparent;
+		border: 0;
+		border-radius: 0;
+		opacity: 0;
+		visibility: hidden;
+		padding: 0;
+		margin: 0;
+		margin-bottom: 12px;
+    margin-top: -5px;
+		position: relative;
+		z-index: 2;
+		transition: all 0.4s ease;
+	}
+	.mobile-menu .footer-socials {
+		position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 100%;
+    z-index: 500;
+    max-width: 100%;
+    padding: 0 30px;
+	}
+	.primary-navigation-open .primary-navigation {
+		z-index: 12;
+		height: 100%;
+	}
+	.primary-navigation-open .site-header .primary-navigation > .primary-menu-container,
+	#masthead .primary-navigation > .primary-menu-container {
+		display: none !important;
+	}
+	.mobile-menu .primary-navigation {
+		display: block;
+	}
+	#page .mobile-menu .primary-navigation > .primary-menu-container {
+		background: rgb(15,5,9);
+background: linear-gradient(180deg, rgba(15,5,9,1) 0%, rgba(60,7,60,1) 100%);
+		padding-top: 100px;
+	}
+	.primary-navigation-open .site-header.has-logo:not(.has-title-and-tagline).has-menu .site-logo {
+		display: block;
+	}
+	.primary-navigation-open .menu-button-container {
+		background: transparent !important;
+	}
 	#masthead .primary-navigation .menu-item-has-children:not(.mm--dropdown) > a {
 		margin-bottom: 5px;
 	}
@@ -2877,6 +2976,24 @@ background: linear-gradient(180deg, rgba(12,157,217,0.03) 0%, rgba(98,38,167,0.1
 		font-size: 18px;
         margin-bottom: 5px;
 		padding: 5px 14px 0 !important;
+	}
+	.mobile-menu #site-navigation.primary-navigation > div > .menu-wrapper > li.active > .sub-menu {
+		opacity: 1;
+		visibility: visible;
+		max-height: 600px;
+	}
+	.mobile-menu .primary-navigation .menu-item-has-children.active > a:after {
+		transform: translatey(-50%) rotate(180deg);
+	}
+	.mobile-menu .primary-navigation .menu-item-has-children.active > a {
+		color: #78BE20;
+	}
+	.site-header.has-logo:not(.has-title-and-tagline).has-menu .site-logo {
+		top: -16px;
+		padding-top: 0;
+	}
+	#masthead .primary-navigation-open .primary-navigation {
+		height: auto;
 	}
 	.locations-hero h1.active {
 		font-size: 30px;
@@ -2942,8 +3059,8 @@ background: linear-gradient(180deg, rgba(12,157,217,0.03) 0%, rgba(98,38,167,0.1
 	h3 {
 		font-size: 30px;
 	}
-	.layer .carousel-slide h2 {
-		font-size: 40px;
+	.layer .carousel-slide h2, .layer .carousel-slide h2 span {
+		font-size: 32px !important;
 	}
 	.layer h2 span {
 		font-size: 60px;
@@ -2990,9 +3107,9 @@ background: linear-gradient(180deg, rgba(12,157,217,0.03) 0%, rgba(98,38,167,0.1
 		color: #fff;
 		margin-bottom: 15px;
 	}
-	.slick-arrow {
+/* 	.slick-arrow {
 		left: 5px;
-	}
+	} */
 	.slick-next {
 		left: initial;
 		right: 5px;
