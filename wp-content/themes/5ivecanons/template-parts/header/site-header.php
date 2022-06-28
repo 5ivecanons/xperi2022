@@ -19,6 +19,27 @@ $wrapper_classes .= has_nav_menu( 'primary' ) ? ' has-menu' : '';
 	<?php get_template_part( 'template-parts/header/site-nav' ); ?>
 	</div>
 </header><!-- #masthead -->
+<div class="mobile-menu">
+	<nav id="site-navigation" class="primary-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Primary menu', 'twentytwentyone' ); ?>">
+		<?php
+		wp_nav_menu(
+			array(
+				'theme_location'  => 'primary',
+				'menu_class'      => 'menu-wrapper',
+				'container_class' => 'primary-menu-container',
+				'items_wrap'      => '<ul id="primary-menu-list" class="%2$s">%3$s</ul>',
+				'fallback_cb'     => false,
+			)
+		);
+		?>
+		<div class="footer-socials">
+						<a href="#" target="_blank"><img src="/wp-content/uploads/2022/05/Icon-awesome-instagram.svg" alt="Instagram" width="25" height="25"></a>
+						<a href="#" target="_blank"><img src="/wp-content/uploads/2022/05/Icon-awesome-linkedin.svg" alt="LinkedIn" width="25" height="25"></a>
+						<a href="#" target="_blank"><img src="/wp-content/uploads/2022/05/Icon-awesome-facebook-square.svg" alt="Facebook" width="25" height="25"></a>
+						<a href="#" target="_blank"><img src="/wp-content/uploads/2022/05/Icon-awesome-envelope.svg" alt="Email" width="33" height="25"></a>
+					</div>
+	</nav>
+</div>
 <div class="subnavigation">
 	<div class="inner-wrap">
 	<?php

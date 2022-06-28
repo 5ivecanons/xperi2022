@@ -130,6 +130,11 @@
 <script src="/wp-content/themes/5ivecanons/assets/map/worldmap.js"></script>
 <script>
 (function($){
+if($('.share-component').length){
+	var $e = $('.entry-content').offset().left - 50;
+	$('.share-component').css('left', $e+'px');
+	console.log($e);
+}
 if($('#map').length){
    $.ajax({
     url: "<?php echo admin_url('admin-ajax.php'); ?>",
@@ -161,10 +166,17 @@ $('.countries').on( 'change', function() {
 	console.log(filterValue);
   $('.locations-wrapper').isotope({ filter: filterValue });
 });
+$('.mobile-menu .menu-item-has-children > a').click(function(e){
+	if(!$(this).parent().hasClass('active')){
+		e.preventDefault();
+		$('.mobile-menu .menu-item-has-children').removeClass('active');
+		$(this).parent().addClass('active');
+	}
+});
 $('.close-mm').click(function(e){
 	$('.subnavigation .megamenu-wrapper').hide(function(){
 		$('.subnavigation, .primary-navigation > div > .menu-wrapper li.active').removeClass('active');
-	$('.subnavigation .inner-wrap').slideUp(500);
+	$('.subnavigation .inner-wrap').slideUp(200);
 	});
 });
 if($(window).width() > 992){
@@ -182,7 +194,7 @@ $('.menu-item-has-children.mm--dropdown a').hover(function(e){
 				var $mm = classes[i].split('--');
 				$('.subnavigation .menu--'+$mm[1]).show(function(){
 					$('.subnavigation').toggleClass('active');
-					$('.subnavigation .inner-wrap').slideDown(500);
+					$('.subnavigation .inner-wrap').slideDown(200);
 				});
 			}
 		}
